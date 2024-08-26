@@ -1,0 +1,22 @@
+{
+  "name": "l1",
+  "version": "1.0.0",
+  "description": "assignment L1 - 1dv610",
+  "type": "module",
+  "browser": "src/js/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "author": "Sandra Julin",
+  "license": "ISC",
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.10"
+  },
+  "dependencies": {
+    "vite": "^5.4.2"
+  }
+}
