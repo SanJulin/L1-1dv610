@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-jsdoc */
 /* eslint-disable jsdoc/require-description */
 import '../name-form/index.js'
 
@@ -6,16 +7,20 @@ template.innerHTML = `
     <style>
     </style>
     <div>
-        <h1></h1>
-        <div>
         <name-form></name-form>
     </div>
+    <div id="greeting">
+    </div>
+
 `
 customElements.define('welcome-application',
   /**
    *
    */
   class extends HTMLElement {
+    #name
+    #greeting
+    #nameForm
     /**
      *
      */
@@ -24,12 +29,21 @@ customElements.define('welcome-application',
       this.attachShadow({ mode: 'open' })
         .appendChild(template.content.cloneNode(true))
 
-      this.shadowRoot.querySelector('name-form').addEventListener('submit', (event) => {
-        event.preventDefault()
-        const name = event.target.name.value
-        this.shadowRoot.querySelector('h1').innerText = `Welcome, ${name}!`
+      this.#nameForm = this.shadowRoot.querySelector('name-form')
+
+      this.#greeting = this.shadowRoot.querySelector('#greeting')
+    }
+
+    connectedCallback () {
+      this.#nameForm.addEventListener('submit', (event) => {
+        this.#name = event.detail
+        console.log(this.#name)
+        this.#showGreeting()
       })
     }
-  })
 
-export default 'welcome-application'
+    #showGreeting () {
+      this.#greeting.textContent = `Hello ${this.#name}`
+    }
+  }
+)
