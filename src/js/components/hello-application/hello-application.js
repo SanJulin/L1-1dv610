@@ -21,7 +21,7 @@ template.innerHTML = `
     }
     </style>
     <div>
-        <name-form></name-form>
+      <name-form></name-form>
     </div>
     <div id="giphy"></div>
     <div id="greeting"></div>
@@ -29,15 +29,15 @@ template.innerHTML = `
 
 customElements.define('hello-application',
   /**
-   * Class representing a hello application
+   * Class representing a Hello application
    */
   class extends HTMLElement {
     #name
-    #greeting
+    #greetingElement
     #nameForm
-    #giphy
+    #giphyElement
     /**
-     * Creates an instance of the HelloApplication class.
+     * Creates an instance of the Hello application class.
      */
     constructor () {
       super()
@@ -46,12 +46,12 @@ customElements.define('hello-application',
 
       // Gets the name-form, greeting and giphy elements
       this.#nameForm = this.shadowRoot.querySelector('name-form')
-      this.#greeting = this.shadowRoot.querySelector('#greeting')
-      this.#giphy = this.shadowRoot.querySelector('#giphy')
+      this.#greetingElement = this.shadowRoot.querySelector('#greeting')
+      this.#giphyElement = this.shadowRoot.querySelector('#giphy')
     }
 
     /**
-     * Called after the element is inserted into the DOM. Adds an event listener to the form.
+     * Called after the element is inserted into the DOM. Adds an event listener to the name input form.
      */
     connectedCallback () {
       this.#nameForm.addEventListener('submit', (event) => {
@@ -62,25 +62,25 @@ customElements.define('hello-application',
     }
 
     /**
-     * Shows a greeting message.
+     * Shows a greeting message to the user.
      */
     #showGreeting () {
       const greeting = `Hello ${this.#name}!`
-      this.#greeting.innerText = greeting
+      this.#greetingElement.innerText = greeting
     }
 
     /**
-     * Shows a random Giphy image from the Giphy API.
+     * Shows a random gif from the Giphy API.
      */
     async #showGiphy () {
-      this.#giphy.innerHTML = ''
+      this.#giphyElement.innerHTML = ''
       const response = await fetch(`${API_URL}?api_key=${API_KEY}&q=hello`)
       const data = await response.json()
-      const randomGiphyIndex = 0 // Math.floor(Math.random() * data.data.length)
+      const randomGiphyIndex = Math.floor(Math.random() * data.data.length)
       const giphy = data.data[randomGiphyIndex]
       const img = document.createElement('img')
       img.src = giphy.images.fixed_height.url
-      this.#giphy.appendChild(img)
+      this.#giphyElement.appendChild(img)
     }
   }
 )

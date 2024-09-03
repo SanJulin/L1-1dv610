@@ -44,7 +44,6 @@ customElements.define('name-form',
   class extends HTMLElement {
     #form
     #inputField
-    #name
     #errorText
     /**
      * Creates an instance of the NameForm class.
@@ -68,18 +67,18 @@ customElements.define('name-form',
       this.#errorText.style.display = 'none'
       this.#form.addEventListener('submit', (event) => {
         event.preventDefault()
-        this.#name = this.#inputField.value
         this.#checkInput()
       })
     }
 
     /**
-     * Checks if the input field is empty and displays an error message if it is. If the input field is not empty a submit event is dispatched with the input field value.
+     * Checks if the input field is empty and displays an error message if it is. If the input field is not empty a dispatch event is issued to sen the user´s name to the hello-application component.
      */
     #checkInput () {
-      if (this.#name.length < 1) {
+      if (this.#inputField.value.length < 1) {
         this.#errorText.style.display = 'block'
       } else {
+        this.#errorText.style.display = 'none'
         this.dispatchEvent(new window.CustomEvent('submit', { detail: this.#inputField.value }))
         this.#inputField.value = ''
       }
