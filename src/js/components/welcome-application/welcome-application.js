@@ -8,6 +8,15 @@ const API_KEY = '5D6v31k403IrIkO3mICgYRm5aezUwkAa'
 const template = document.createElement('template')
 template.innerHTML = `
     <style>
+    #greeting {
+    margin-top: 100px;
+    margin-left: 100px;
+    font-size: 40px;
+    }
+    #giphy {
+    margin-top: 40px;
+    margin-left: 100px;
+    }
     </style>
     <div>
         <name-form></name-form>
@@ -43,7 +52,6 @@ customElements.define('welcome-application',
     }
 
     connectedCallback () {
-      this.#showGiphy()
       this.#nameForm.addEventListener('submit', (event) => {
         this.#name = event.detail
         console.log(this.#name)
@@ -53,7 +61,7 @@ customElements.define('welcome-application',
     }
 
     #showGreeting () {
-      const greeting = `Hello ${this.#name}`
+      const greeting = `Hello ${this.#name}!`
       console.log(this.#name)
       this.#greeting.innerText = greeting
     }
