@@ -76,7 +76,7 @@ customElements.define('hello-application',
       this.#giphy.innerHTML = ''
       const response = await fetch(`${API_URL}?api_key=${API_KEY}&q=hello`)
       const data = await response.json()
-      const randomGiphyIndex = Math.floor(Math.random() * data.data.length)
+      const randomGiphyIndex = 0 // Math.floor(Math.random() * data.data.length)
       const giphy = data.data[randomGiphyIndex]
       const img = document.createElement('img')
       img.src = giphy.images.fixed_height.url

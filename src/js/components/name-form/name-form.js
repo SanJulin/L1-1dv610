@@ -80,7 +80,6 @@ customElements.define('name-form',
       if (this.#name.length < 1) {
         this.#errorText.style.display = 'block'
       } else {
-        this.#errorText.style.display = 'none'
         this.dispatchEvent(new window.CustomEvent('submit', { detail: this.#inputField.value }))
         this.#inputField.value = ''
       }
