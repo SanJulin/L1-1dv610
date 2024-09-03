@@ -2,6 +2,9 @@
 /* eslint-disable jsdoc/require-description */
 import '../name-form/index.js'
 
+const GIPHY_URL = 'https://api.giphy.com/v1/gifs/search'
+const API_KEY = '5D6v31k403IrIkO3mICgYRm5aezUwkAa'
+
 const template = document.createElement('template')
 template.innerHTML = `
     <style>
@@ -11,8 +14,10 @@ template.innerHTML = `
     </div>
     <div id="greeting">
     </div>
-
+    <div id="giphy">
+    </div>
 `
+
 customElements.define('welcome-application',
   /**
    *
@@ -21,6 +26,7 @@ customElements.define('welcome-application',
     #name
     #greeting
     #nameForm
+    #giphy
     /**
      *
      */
@@ -32,18 +38,36 @@ customElements.define('welcome-application',
       this.#nameForm = this.shadowRoot.querySelector('name-form')
 
       this.#greeting = this.shadowRoot.querySelector('#greeting')
+
+      this.#giphy = this.shadowRoot.querySelector('#giphy')
     }
 
     connectedCallback () {
+      this.#showGiphy()
       this.#nameForm.addEventListener('submit', (event) => {
         this.#name = event.detail
         console.log(this.#name)
         this.#showGreeting()
+        this.#showGiphy()
       })
     }
 
     #showGreeting () {
-      this.#greeting.textContent = `Hello ${this.#name}`
+      const greeting = `Hello ${this.#name}`
+      console.log(this.#name)
+      this.#greeting.innerText = greeting
+    }
+
+    async #showGiphy () {
+      this.#giphy.innerHTML = ''
+      const response = await fetch(`${GIPHY_URL}?api_key=${API_KEY}&q=hello`)
+      const data = await response.json()
+      console.log(data)
+      const randomGiphyIndex = Math.floor(Math.random() * data.data.length)
+      const giphy = data.data[randomGiphyIndex]
+      const img = document.createElement('img')
+      img.src = giphy.images.fixed_height.url
+      this.#giphy.appendChild(img)
     }
   }
 )
