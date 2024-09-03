@@ -1,1 +1,0 @@
-import './welcome-application.js'
