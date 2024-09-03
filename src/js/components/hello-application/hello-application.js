@@ -3,7 +3,7 @@
  */
 import '../name-form/index.js'
 
-const GIPHY_URL = 'https://api.giphy.com/v1/gifs/search'
+const API_URL = 'https://api.giphy.com/v1/gifs/search'
 const API_KEY = '5D6v31k403IrIkO3mICgYRm5aezUwkAa'
 
 const template = document.createElement('template')
@@ -74,7 +74,7 @@ customElements.define('hello-application',
      */
     async #showGiphy () {
       this.#giphy.innerHTML = ''
-      const response = await fetch(`${GIPHY_URL}?api_key=${API_KEY}&q=hello`)
+      const response = await fetch(`${API_URL}?api_key=${API_KEY}&q=hello`)
       const data = await response.json()
       const randomGiphyIndex = Math.floor(Math.random() * data.data.length)
       const giphy = data.data[randomGiphyIndex]

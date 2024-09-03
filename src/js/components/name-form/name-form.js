@@ -23,10 +23,13 @@ template.innerHTML = `
     }
     #errorText {
     display: none;
+    font-size: 12px;
+    margin-left: 100px;
+    margin-top: 10px;
     }
     </style>
     <div>
-        <p>Pls enter your name and click on Hello to get your greeting!</>
+        <p>Pls enter your name and click on Hello to get your greeting!</p>
         <form>
             <input type="text" id="name" name="name">
             <button type="submit">Hello</button>
@@ -62,6 +65,7 @@ customElements.define('name-form',
      * Adds an event listener to the name form. If the form is submitted, the input field value is checked.
      */
     connectedCallback () {
+      this.#errorText.style.display = 'none'
       this.#form.addEventListener('submit', (event) => {
         event.preventDefault()
         this.#name = this.#inputField.value
