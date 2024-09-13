@@ -1,5 +1,4 @@
-/**
- * Starting point of the application
- */
 
-import './components/hello-application/index.js'
+import Game from "./Game"
+
+const Game = new Game()

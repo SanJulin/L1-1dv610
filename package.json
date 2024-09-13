@@ -1,7 +1,7 @@
 {
-  "name": "l1",
+  "name": "workshop",
   "version": "1.0.0",
-  "description": "assignment L1 - 1dv610",
+  "description": "Workshop 1 - Koda med andra",
   "type": "module",
   "browser": "src/js/index.js",
   "scripts": {

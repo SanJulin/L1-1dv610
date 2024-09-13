@@ -1,6 +1,4 @@
 body, html {
 	background-color: rgb(196, 217, 221);
-    display: flex;
-    justify-content: center;
-    font-family:Georgia, 'Times New Roman', Times, serif
+    font-family: Georgia, 'Times New Roman', Times, serif
 }
